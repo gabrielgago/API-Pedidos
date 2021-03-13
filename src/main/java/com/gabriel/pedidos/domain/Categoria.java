@@ -2,6 +2,7 @@ package com.gabriel.pedidos.domain;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -90,6 +91,10 @@ public class Categoria implements Serializable {
 	@Override
 	public String toString() {
 		return "Categoria [id=" + id + ", nomeString=" + nome + ", produtos=" + produtos + "]";
+	}
+
+	public void addProdutos(Produto... produtos) {
+		this.produtos.addAll(List.of(produtos));
 	}
 
 }

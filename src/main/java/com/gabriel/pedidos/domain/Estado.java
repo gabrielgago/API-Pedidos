@@ -2,6 +2,7 @@ package com.gabriel.pedidos.domain;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -81,6 +82,10 @@ public class Estado implements Serializable{
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public void addCidades(Cidade... cidades) {
+		this.cidades.addAll(List.of(cidades));
 	}
 
 }

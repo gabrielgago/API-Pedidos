@@ -3,6 +3,7 @@ package com.gabriel.pedidos.domain;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -103,6 +104,10 @@ public class Produto implements Serializable {
 	@Override
 	public String toString() {
 		return "Produto [id=" + id + ", nome=" + nome + ", preco=" + preco + ", categorias=" + categorias + "]";
+	}
+
+	public void addCategorias(Categoria... categorias) {
+		this.categorias.addAll(List.of(categorias));		
 	}
 
 }
