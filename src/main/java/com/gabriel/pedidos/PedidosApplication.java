@@ -129,7 +129,7 @@ public class PedidosApplication implements CommandLineRunner {
 
 		ItemPedido ip1 = new ItemPedido(ped1, p1, BigDecimal.ZERO.setScale(2, RoundingMode.HALF_EVEN), 1,
 				BigDecimal.valueOf(2000.00));
-		ItemPedido ip2 = new ItemPedido(ped1, p1, BigDecimal.ZERO, 2, BigDecimal.valueOf(80));
+		ItemPedido ip2 = new ItemPedido(ped1, p2, BigDecimal.ZERO, 2, BigDecimal.valueOf(80));
 		ItemPedido ip3 = new ItemPedido(ped2, p2, BigDecimal.valueOf(100), 1, BigDecimal.valueOf(800));
 
 		ped1.addItens(ip1, ip2);
