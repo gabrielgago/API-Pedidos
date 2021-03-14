@@ -1,9 +1,8 @@
 package com.gabriel.pedidos.domain;
 
 import java.io.Serializable;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,7 +27,7 @@ public class Categoria implements Serializable {
 
 	@JsonManagedReference
 	@ManyToMany(mappedBy = "categorias")
-	private Set<Produto> produtos = new HashSet<>();
+	private List<Produto> produtos = new ArrayList<>();
 
 	public Categoria() {
 	}
@@ -55,11 +54,11 @@ public class Categoria implements Serializable {
 		this.nome = nome;
 	}
 
-	public Set<Produto> getProdutos() {
+	public List<Produto> getProdutos() {
 		return produtos;
 	}
 
-	public void setProdutos(Set<Produto> produtos) {
+	public void setProdutos(List<Produto> produtos) {
 		this.produtos = produtos;
 	}
 

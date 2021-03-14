@@ -1,9 +1,8 @@
 package com.gabriel.pedidos.domain;
 
 import java.io.Serializable;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,8 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
-public class Estado implements Serializable{
+public class Estado implements Serializable {
 
 	/**
 	 * 
@@ -22,9 +23,10 @@ public class Estado implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	
+
+	@JsonBackReference
 	@OneToMany(mappedBy = "estado")
-	private Set<Cidade> cidades = new HashSet<>();
+	private List<Cidade> cidades = new ArrayList<>();
 
 	public Estado() {
 	}
@@ -51,11 +53,11 @@ public class Estado implements Serializable{
 		this.nome = nome;
 	}
 
-	public Set<Cidade> getCidades() {
+	public List<Cidade> getCidades() {
 		return cidades;
 	}
 
-	public void setCidades(Set<Cidade> cidades) {
+	public void setCidades(List<Cidade> cidades) {
 		this.cidades = cidades;
 	}
 
@@ -86,6 +88,11 @@ public class Estado implements Serializable{
 
 	public void addCidades(Cidade... cidades) {
 		this.cidades.addAll(List.of(cidades));
+	}
+
+	@Override
+	public String toString() {
+		return "Estado [id=" + id + ", nome=" + nome + ", cidades=" + this.cidades + "]";
 	}
 
 }

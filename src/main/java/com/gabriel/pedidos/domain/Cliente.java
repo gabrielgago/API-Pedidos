@@ -1,6 +1,7 @@
 package com.gabriel.pedidos.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -14,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.gabriel.pedidos.domain.enums.TipoCliente;
 
 @Entity
@@ -30,11 +32,17 @@ public class Cliente implements Serializable {
 	private String email;
 	private String cpfOuCnpj;
 	private Integer tipo;
+
+	@JsonManagedReference
 	@OneToMany(mappedBy = "cliente")
-	private Set<Endereco> enderecos = new HashSet<>();
+	private List<Endereco> enderecos = new ArrayList<>();
+
 	@ElementCollection
-	@CollectionTable(name="Telefone")
+	@CollectionTable(name = "Telefone")
 	private Set<String> telefones = new HashSet<>();
+
+	@OneToMany(mappedBy = "cliente")
+	private List<Pedido> pedidos = new ArrayList<>();
 
 	public Cliente() {
 	}
@@ -88,20 +96,44 @@ public class Cliente implements Serializable {
 		this.tipo = tipo.getCod();
 	}
 
-	public Set<Endereco> getEnderecos() {
-		return enderecos;
-	}
-
-	public void setEnderecos(Set<Endereco> enderecos) {
-		this.enderecos = enderecos;
-	}
+//	public Set<Endereco> getEnderecos() {
+//		return enderecos;
+//	}
+//
+//	public void setEnderecos(Set<Endereco> enderecos) {
+//		this.enderecos = enderecos;
+//	}
 
 	public Set<String> getTelefones() {
 		return telefones;
 	}
 
+	public List<Endereco> getEnderecos() {
+		return enderecos;
+	}
+
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
+	}
+
 	public void setTelefones(Set<String> telefones) {
 		this.telefones = telefones;
+	}
+
+	public void addTelefones(String... telefones) {
+		this.telefones.addAll(Arrays.asList(telefones));
+	}
+
+	public void addEnderecos(Endereco... enderecos) {
+		this.enderecos.addAll(List.of(enderecos));
+	}
+
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
 	}
 
 	@Override
@@ -129,14 +161,7 @@ public class Cliente implements Serializable {
 		return true;
 	}
 
-	public void addTelefones(String... telefones) {
-		this.telefones.addAll(Arrays.asList(telefones));
+	public void addPedidos(Pedido...pedidos) {
+		this.pedidos.addAll(List.of(pedidos));
 	}
-
-	public void addEnderecos(Endereco... enderecos) {
-		this.enderecos.addAll(List.of(enderecos));
-	}
-	
-	
-
 }
